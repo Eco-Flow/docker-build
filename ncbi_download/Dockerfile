@@ -1,11 +1,12 @@
-FROM mambaorg/micromamba:0.13.1
+FROM ubuntu:22.04
 
-COPY conda.yml conda.here.yml
+ARG datasets_version="v16.1.2"
+ARG datasets_architecture="linux-arm64"
 
 RUN apt-get update \
-    && apt-get install -y wget \
-                          procps \
+    && apt-get install -y wget procps unzip \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
-RUN micromamba install -y -n base -f conda.here.yml && \
-    micromamba clean --all --yes
+RUN wget "https://github.com/ncbi/datasets/releases/download/${datasets_version}/${datasets_architecture}.cli.package.zip" && \
+    unzip "${datasets_architecture}.cli.package.zip" -d /usr/local/bin && \
+    rm /"${datasets_architecture}.cli.package.zip"
