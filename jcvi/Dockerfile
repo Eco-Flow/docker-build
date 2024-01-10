@@ -25,4 +25,4 @@ RUN wget "https://gitlab.com/mcfrith/last/-/archive/1522/last-${last_version}.ta
     make && \
     rm "/last-${last_version}.tar.gz"
 
-ENV PATH="${PATH}:/opt/last-${last_version}/bin
+ENV PATH="${PATH}:/opt/last-${last_version}/bin"
