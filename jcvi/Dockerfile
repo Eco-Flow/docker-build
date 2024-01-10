@@ -24,3 +24,5 @@ RUN wget "https://gitlab.com/mcfrith/last/-/archive/1522/last-${last_version}.ta
     cd "/opt/last-${last_version}" && \
     make && \
     rm "/last-${last_version}.tar.gz"
+
+ENV PATH="${PATH}:/opt/last-${last_version}/bin
