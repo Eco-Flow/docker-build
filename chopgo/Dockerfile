@@ -1,7 +1,7 @@
 FROM rocker/r-base:4.3.1
 
 RUN apt-get update && \
-    apt-get install -y python3.10 wget procps libcurl4-openssl-dev libssl-dev && \
+    apt-get install -y python3.10 wget procps libcurl4-openssl-dev libssl-dev perl && \
     apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 RUN Rscript -e "install.packages(c('BiocManager', 'devtools', 'dplyr', 'readxl', 'writexls', 'plyr', 'gdata', 'pheatmap', 'ashr', 'ggplot2', 'ggstar'))"
@@ -18,3 +18,5 @@ RUN wget "https://anaconda.org/bioconda/newick_utils/${newick_version}/download/
     rm /"newick_utils-${newick_version}-h031d066_7.tar.bz2"
 
 ENV PATH="${PATH}:/opt/newick/bin"
+
+RUN Rscript -e "install.packages('R.utils')"
