@@ -12,3 +12,6 @@ RUN cpanm Dist::Zilla::Plugin::AutoPrereqs Dist::Zilla::Plugin::Encoding Dist::Z
 RUN cpanm --force XML::DOM::XPath
 
 RUN cpanm --force Bio::Seq Bio::SeqIO
+
+#Have to manually add docker numbers subuid and subgid 
+RUN echo "docker:100000:65536" | tee -a /etc/subuid /etc/subgid > /dev/null 
