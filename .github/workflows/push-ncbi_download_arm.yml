@@ -1,12 +1,12 @@
-name: Build gffread_python
+name: Build ncbi_download_arm
 
 on:
   workflow_dispatch
 
 #When updating images change image tag below to correspond to changes
 env:
-  IMAGE_NAME: gffread_python
-  IMAGE_TAG: python-3.10_Linux_x86_64
+  IMAGE_NAME: ncbi_download
+  IMAGE_TAG: v16.1.2-arm64
 
 jobs:
   build:
@@ -25,7 +25,7 @@ jobs:
 
     - name: Build image
       id: build-image
-      run: docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -f ${IMAGE_NAME}/Dockerfile . 
+      run: docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -f ${IMAGE_NAME}/Dockerfile_arm . 
 
     - name: Quay.io login
       run: docker login -u ${{ secrets.DOCKERBUILD_ROBOT_USERNAME }} --password-stdin <<< ${{ secrets.DOCKERBUILD_ROBOT_PASSWORD }} quay.io

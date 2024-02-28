@@ -1,12 +1,12 @@
-name: Build gffread_python
+name: Build chopgo
 
 on:
   workflow_dispatch
 
 #When updating images change image tag below to correspond to changes
 env:
-  IMAGE_NAME: gffread_python
-  IMAGE_TAG: python-3.10_Linux_x86_64
+  IMAGE_NAME: chopgo
+  IMAGE_TAG: r-4.3.2_python-3.10_perl-5.38
 
 jobs:
   build:

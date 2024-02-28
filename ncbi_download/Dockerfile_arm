@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 ARG datasets_version="v16.1.2"
-ARG datasets_architecture="linux-amd64" # linux-arm64 
+ARG datasets_architecture="linux-arm64"
 
 RUN apt-get update \
     && apt-get install -y wget procps unzip \
