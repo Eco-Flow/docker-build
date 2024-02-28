@@ -24,32 +24,36 @@ jobs:
       run: docker --version
 
     - name: Build image
+      id: build-image
       run: docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -f ${IMAGE_NAME}/Dockerfile . 
 
-    - name: Quay.io login
-      run: docker login -u ${{ secrets.DOCKERBUILD_ROBOT_USERNAME }} -p ${{ secrets.DOCKERBUILD_ROBOT_PASSWORD }}
-
-    - name: Tag image
-      run: docker tag ${IMAGE_NAME}:${IMAGE_TAG} quay.io/ecoflowucl/${IMAGE_NAME}:${IMAGE_TAG}
-
-    - name: Push image
-      run: docker push quay.io/ecoflowucl/${IMAGE_NAME}:${IMAGE_TAG}
-
+#    - name: Quay.io login
+#      run: docker login -u ${{ secrets.DOCKERBUILD_ROBOT_USERNAME }} -p ${{ secrets.DOCKERBUILD_ROBOT_PASSWORD }}
+#      with:
+#        image: ${IMAGE_NAME}
+#        tags: ${IMAGE_TAG}
+#
+#    - name: Tag image
+#      run: docker tag ${IMAGE_NAME}:${IMAGE_TAG} quay.io/ecoflowucl/${IMAGE_NAME}:${IMAGE_TAG}
+#
+#    - name: Push image
+#      run: docker push quay.io/ecoflowucl/${IMAGE_NAME}:${IMAGE_TAG}
+#
 #      uses: redhat-actions/buildah-build@v2.12
 #      with:
 #        image: gffread_python
 #        tags: python-3.10_linux_x86_64
 #        containerfiles: gffread_python/Dockerfile
 #
-#    - name: Push To quay.io
-#      id: push-to-quay
-#      uses: redhat-actions/push-to-registry@v2.7
-#      with:
-#        image: ${{ steps.build-image.outputs.image }}
-#        tags: ${{ steps.build-image.outputs.tags }}
-#        registry: quay.io/ecoflowucl
-#        username: ecoflowucl+dockerbuild
-#        password: ${{ secrets.DOCKERBUILD_ROBOT_CREDENTIALS }}
+    - name: Push to Quay.io
+      id: push-to-quay
+      uses: redhat-actions/push-to-registry@v2.7
+      with:
+        image: ${{ steps.build-image.outputs.image }}
+        tags: ${{ steps.build-image.outputs.tags }}
+        registry: quay.io/ecoflowucl
+        username: ${{ secrets.DOCKERBUILD_ROBOT_USERNAME }}
+        password: ${{ secrets.DOCKERBUILD_ROBOT_PASSWORD }}
 #
 #    - name: Print image url
 #      run: echo "Image pushed to ${{ steps.push-to-quay.outputs.registry-paths }}"
