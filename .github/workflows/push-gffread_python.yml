@@ -23,9 +23,9 @@ jobs:
       id: build-image
       uses: redhat-actions/buildah-build@v2
       with:
-        image: ${IMAGE_NAME} 
-        tags: ${IMAGE_TAG}
-        containerfiles: ${IMAGE_NAME}/Dockerfile
+        image: gffread_python
+        tags: python-3.10_Linux_x86_64
+        containerfiles: gffread_python/Dockerfile
 
     - name: Push To quay.io
       id: push-to-quay
