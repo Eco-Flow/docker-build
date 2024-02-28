@@ -3,14 +3,9 @@ name: Build gffread_python
 on:
   workflow_dispatch
 
-#When updating images change image tag below to correspond to changes
-env:
-  IMAGE_NAME: gffread_python
-  IMAGE_TAG: python-3.10_Linux_x86_64
-
 jobs:
   build:
-    name: Build and push ${IMAGE_NAME} image
+    name: Build and push gffread_python image
     runs-on: ubuntu-latest
 
     steps:
@@ -21,15 +16,15 @@ jobs:
 
     - name: Build Image
       id: build-image
-      uses: redhat-actions/buildah-build@v2
+      uses: redhat-actions/buildah-build@v2.12
       with:
         image: gffread_python
-        tags: python-3.10_Linux_x86_64
+        tags: python-3.10_linux_x86_64
         containerfiles: gffread_python/Dockerfile
 
     - name: Push To quay.io
       id: push-to-quay
-      uses: redhat-actions/push-to-registry@v2
+      uses: redhat-actions/push-to-registry@v2.7
       with:
         image: ${{ steps.build-image.outputs.image }}
         tags: ${{ steps.build-image.outputs.tags }}
