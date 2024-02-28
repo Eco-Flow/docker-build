@@ -1,34 +1,40 @@
 # docker-build
 
+### Automatically publish containers
+Once a new Dockerfile has been pushed to this repository check if a workflow yml file already exists for it.
+If so, go into the actions tab and choose the relevant workflow to run.
+Select "Run workflow" and the image will be built and pushed to quay.io.
 
-1. To build a docker container, first choose a template from the existing builds in this repo.
+If a workflow yml doesn't exist, copy an existing one i.e. `cp push-jcvi.yml push-your_image_name.yml` and then edit the following lines:
+* Replace `name: Build jcvi` with `name: Build your_image_name`
+* Replace `IMAGE_NAME: jcvi` with `IMAGE_NAME: your_image_name`
+* Replace `IMAGE_TAG: python-3.10_last-1522` with `IMAGE_TAG: your_image_tag`
 
-2. Then edit your conda.yml and or Dockerfile to add the programs you needs.
-
-2i. Make sure to keep the procps line, as this is needed for nf-tower
-
-3. Then build the container (don't forget the `.`):
+### If you want to build containers manually and publish them to quay.io then log into GitPod and do the following:
+1. Build the container (don't forget the `.`):
 
 `docker build -t my-image .`
 
-4. Test your container 
+2. Test the container 
 
-`docker run -it my-image bash`
+`docker run --rm -it my-image bash`
 
 or (with directory mounted):
 
-`docker run --volume $PWD:$PWD -it my-image bash`
+`docker run --rm -it --volume $PWD:$PWD my-image bash`
 
 <Make sure to `exit` the docker container>
 
-5. Push your working repo to dockerhub
+3. Log in with your quay.io account
 
-6. `docker login -u ecoflowucl`
+`docker login -u your-username quay.io`
 
-Then use an access token to login.
+and use your access token as the password.
 
-7. Tag it, e.g.:
-`docker tag my-image ecoflowucl/ncbi_download`
+4. Tag the image:
+   
+`docker tag my-image quay.io/ecoflowucl/my-image`
 
-8. Push it:
-`docker push ecoflowucl/ncbi_download`
+5. Push the image:
+   
+`docker push quay.io/ecoflowucl/my-image`
