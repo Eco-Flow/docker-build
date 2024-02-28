@@ -19,7 +19,12 @@ jobs:
 
     #Removing Docker 25 as it causes gitpod issues and installing Docker 24.0.7
     -name: Uninstall conflicting packages
-     run: for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done 
+     run: sudo apt-get remove docker.io \
+          && sudo apt-get remove docker-doc \
+          && sudo apt-get docker-compose \
+          && sudo apt-get docker-compose-v2 \
+          && sudo apt-get podman-docker \
+          && sudo apt-get containerd runc
 
     -name: Remove previous Docker configuration file
      run: sudo rm /etc/init.d/docker
