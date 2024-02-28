@@ -5,7 +5,13 @@ Once a new Dockerfile has been pushed to this repository check if a workflow yml
 If so, go into the actions tab and choose the relevant workflow to run.
 Select "Run workflow" and the image will be built and pushed to quay.io.
 
-If a workflow yml doesn't exist, copy an existing one i.e. `cp push-jcvi.yml push-your_image_name.yml` and then edit the following lines:
+If a workflow yml doesn't exist there are a few steps needed.
+
+Firstly, ensure that an empty repository with the appropriate name is created in quay.io. Then make sure the dockerbuild robot has write permissions to that new repository.
+
+Once that is completed, you can create a new workflow yaml.
+
+Copy an existing workflow yaml i.e. `cp push-jcvi.yml push-your_image_name.yml` and then edit the following lines:
 * Replace `name: Build jcvi` with `name: Build your_image_name`
 * Replace `IMAGE_NAME: jcvi` with `IMAGE_NAME: your_image_name`
 * Replace `IMAGE_TAG: python-3.10_last-1522` with `IMAGE_TAG: your_image_tag`
