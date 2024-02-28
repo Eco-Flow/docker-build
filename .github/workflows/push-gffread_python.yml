@@ -1,0 +1,44 @@
+name: Build gffread_python
+
+on:
+  workflow_dispatch
+
+#When updating images change image tag below to correspond to changes
+env:
+  IMAGE_NAME: gffread_python
+  IMAGE_TAG: python-3.10_Linux_x86_64
+
+jobs:
+  build:
+    name: Build and push ${IMAGE_NAME} image
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clean workspace before start
+      run: rm -rf $GITHUB_WORKSPACE/*
+
+    - uses: actions/checkout@v4.1.1
+
+    - name: Build Image
+      id: build-image
+      uses: redhat-actions/buildah-build@v2
+      with:
+        image: ${IMAGE_NAME} 
+        tags: ${IMAGE_TAG}
+        containerfiles: ${IMAGE_NAME}/Dockerfile
+
+    - name: Push To quay.io
+      id: push-to-quay
+      uses: redhat-actions/push-to-registry@v2
+      with:
+        image: ${{ steps.build-image.outputs.image }}
+        tags: ${{ steps.build-image.outputs.tags }}
+        registry: quay.io/ecoflowucl
+        username: ecoflowucl+dockerbuild
+        password: ${{ secrets.DOCKERBUILD_ROBOT_CREDENTIALS }}
+
+    - name: Print image url
+      run: echo "Image pushed to ${{ steps.push-to-quay.outputs.registry-paths }}"
+
+    - name: Clean workspace after finish
+      run: rm -rf $GITHUB_WORKSPACE/*
