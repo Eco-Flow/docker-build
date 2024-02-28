@@ -18,13 +18,13 @@ jobs:
     - uses: actions/checkout@v4.1.1
 
     #Removing Docker 25 as it causes gitpod issues and installing Docker 24.0.7
-    - name: Uninstall conflicting packages
-      run: sudo apt-get remove docker.io \
-           && sudo apt-get remove docker-doc \
-           && sudo apt-get docker-compose \
-           && sudo apt-get docker-compose-v2 \
-           && sudo apt-get podman-docker \
-           && sudo apt-get containerd runc
+    #- name: Uninstall conflicting packages
+    #  run: sudo apt-get remove docker.io \
+    #       && sudo apt-get remove docker-doc \
+    #       && sudo apt-get docker-compose \
+    #       && sudo apt-get docker-compose-v2 \
+    #       && sudo apt-get podman-docker \
+    #       && sudo apt-get containerd runc
 
     - name: Remove previous Docker configuration file
       run: sudo rm /etc/init.d/docker
