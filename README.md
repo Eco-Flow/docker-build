@@ -44,3 +44,6 @@ and use your access token as the password.
 5. Push the image:
    
 `docker push quay.io/ecoflowucl/my-image`
+
+### Listed below are containers cannot be built with actions
+pearrm - requires you buying software (free for academics) so uses local copy that can't be added to repo
