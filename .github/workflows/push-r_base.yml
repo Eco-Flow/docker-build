@@ -6,7 +6,7 @@ on:
 #When updating images change image tag below to correspond to changes
 env:
   IMAGE_NAME: rocker-r_base
-  IMAGE_TAG: r-base-4.3.3
+  IMAGE_TAG: r-base-4.3.3_dplyr-1.1.4
 
 jobs:
   build:
