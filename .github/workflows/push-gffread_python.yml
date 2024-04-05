@@ -6,7 +6,7 @@ on:
 #When updating images change image tag below to correspond to changes
 env:
   IMAGE_NAME: gffread_python
-  IMAGE_TAG: python-3.10_Linux_x86_64
+  IMAGE_TAG: python-3.11.9_Linux_x86_64_perl-5.36.0
 
 jobs:
   build:
