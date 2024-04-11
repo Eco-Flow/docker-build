@@ -6,7 +6,7 @@ on:
 #When updating images change image tag below to correspond to changes
 env:
   IMAGE_NAME: biomart_perl
-  IMAGE_TAG: r-4.3.3_perl-5.38.2 
+  IMAGE_TAG: r-4.3.1_perl-5.38.2 
 
 jobs:
   build:
