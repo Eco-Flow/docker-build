@@ -15,13 +15,15 @@ RUN apt-get update --quiet && \
         curl \
         tree
 
+RUN apt-get update && apt-get remove -y python && apt-get install -y python3 r-base
+
 # Install nextflow and nf-test
 RUN /usr/local/bin/curl -s https://get.nextflow.io | bash
-RUN /usr/local/bin/chmod +x nextflow
+RUN /usr/bin/chmod +x nextflow
 RUN sudo mv nextflow /usr/local/bin
 
 # Install R and python
-RUN apt-get update && apt-get remove -y python && apt-get install -y python3 r-base
+
 
 # Change user to gitpod
 USER gitpod
