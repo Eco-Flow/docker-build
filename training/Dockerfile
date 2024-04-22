@@ -23,15 +23,6 @@ RUN apt-get update &&  apt-get install -y \
     openjdk-${JAVA_VERSION}-jdk \
     && rm -rf /var/lib/apt/lists/*
 
-# Install nextflow 
-RUN curl -s https://get.nextflow.io | bash
-RUN chmod +x nextflow
-RUN mv nextflow /usr/local/bin/nextflow
-
-#Install nf-test
-RUN curl -fsSL https://code.askimed.com/install/nf-test | bash
-RUN mv nf-test /usr/local/bin/nf-test
-
 # User permissions
 RUN mkdir -p /workspace/data \
     && chown -R gitpod:gitpod /workspace/data
@@ -39,6 +30,11 @@ RUN mkdir -p /workspace/data \
 # Change user to gitpod
 USER gitpod
 
-RUN unset JAVA_TOOL_OPTIONS
+# Install nextflow 
+RUN curl -s https://get.nextflow.io | bash
+RUN chmod +x nextflow
+RUN sudo mv nextflow /usr/local/bin/nextflow
 
-RUN export PS1='\t -> '
+#Install nf-test
+RUN curl -fsSL https://code.askimed.com/install/nf-test | bash
+RUN sudo mv nf-test /usr/local/bin/nf-test
