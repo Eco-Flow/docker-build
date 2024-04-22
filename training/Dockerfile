@@ -15,26 +15,22 @@ RUN apt-get update --quiet && \
         curl \
         tree
 
+#Install python and R
 RUN apt-get update && apt-get remove -y python && apt-get install -y python3 r-base
 
-# Install nextflow and nf-test
-RUN /usr/local/bin/curl -s https://get.nextflow.io | bash
-RUN /usr/bin/chmod +x nextflow
-RUN sudo mv nextflow /usr/local/bin
+#Install java
+ENV JAVA_VERSION=17
+RUN apt-get update &&  apt-get install -y \
+    openjdk-${JAVA_VERSION}-jdk \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install R and python
-
-
-# Change user to gitpod
 USER gitpod
 
-# Uncomment if we need to pin the Nextflow version
-ENV NXF_EDGE=1
-ENV NXF_VER=24.02.0-edge
- 
-# Update Nextflow
-RUN nextflow self-update && nextflow -version
+# Install nextflow 
+RUN curl -s https://get.nextflow.io | bash
+RUN chmod +x nextflow
+RUN sudo mv nextflow /usr/local/bin/nextflow
 
-RUN unset JAVA_TOOL_OPTIONS
-
-RUN export PS1='\t -> '
+#Install nf-test
+RUN curl -fsSL https://code.askimed.com/install/nf-test | bash
+RUN sudo mv nf-test /usr/local/bin/nf-test
