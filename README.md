@@ -41,6 +41,8 @@ and use your access token as the password.
    
 `docker tag my-image quay.io/ecoflowucl/my-image`
 
+with a tag that is appropriate `quay.io/ecoflowucl/my-image:v1.0`
+
 5. Push the image:
    
 `docker push quay.io/ecoflowucl/my-image`

@@ -13,18 +13,15 @@ RUN apt-get update --quiet && \
         less \
         wget \
         curl \
-        tree
-
-#Install python and R
-RUN apt-get update && apt-get remove -y python && apt-get install -y python3 r-base
+        tree \
+        python3 \
+        r-base
 
 #Install java
 ENV JAVA_VERSION=17
 RUN apt-get update &&  apt-get install -y \
     openjdk-${JAVA_VERSION}-jdk \
     && rm -rf /var/lib/apt/lists/*
-
-USER gitpod
 
 # Install nextflow 
 RUN curl -s https://get.nextflow.io | bash
@@ -34,3 +31,5 @@ RUN sudo mv nextflow /usr/local/bin/nextflow
 #Install nf-test
 RUN curl -fsSL https://code.askimed.com/install/nf-test | bash
 RUN sudo mv nf-test /usr/local/bin/nf-test
+
+USER gitpod
