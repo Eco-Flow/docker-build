@@ -26,11 +26,11 @@ RUN apt-get update &&  apt-get install -y \
 # Install nextflow 
 RUN curl -s https://get.nextflow.io | bash
 RUN chmod +x nextflow
-RUN sudo mv nextflow /usr/local/bin/nextflow
+RUN mv nextflow /usr/local/bin/nextflow
 
 #Install nf-test
 RUN curl -fsSL https://code.askimed.com/install/nf-test | bash
-RUN sudo mv nf-test /usr/local/bin/nf-test
+RUN mv nf-test /usr/local/bin/nf-test
 
 # User permissions
 RUN mkdir -p /workspace/data \
