@@ -32,4 +32,13 @@ RUN sudo mv nextflow /usr/local/bin/nextflow
 RUN curl -fsSL https://code.askimed.com/install/nf-test | bash
 RUN sudo mv nf-test /usr/local/bin/nf-test
 
+# User permissions
+RUN mkdir -p /workspace/data \
+    && chown -R gitpod:gitpod /workspace/data
+
+# Change user to gitpod
 USER gitpod
+
+RUN unset JAVA_TOOL_OPTIONS
+
+RUN export PS1='\t -> '
