@@ -38,3 +38,7 @@ RUN sudo mv nextflow /usr/local/bin/nextflow
 #Install nf-test
 RUN curl -fsSL https://code.askimed.com/install/nf-test | bash
 RUN sudo mv nf-test /usr/local/bin/nf-test
+
+RUN sudo Rscript -e "install.packages(c('BiocManager'))"
+
+RUN sudo Rscript -e "BiocManager::install('DESeq2')"
