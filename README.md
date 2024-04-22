@@ -47,5 +47,9 @@ with a tag that is appropriate `quay.io/ecoflowucl/my-image:v1.0`
    
 `docker push quay.io/ecoflowucl/my-image`
 
+6. Make repo public on Quay.io
+
+Go to settings on the Quay webpage for ecoflow
+
 ### Listed below are containers cannot be built with actions
 pearrm - requires you buying software (free for academics) so uses local copy that can't be added to repo
