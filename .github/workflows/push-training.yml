@@ -28,7 +28,7 @@ jobs:
       run: docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -f ${IMAGE_NAME}/Dockerfile . 
 
     - name: Quay.io login
-      run: docker login -u ${{ secrets.DOCKERBUILD_ROBOT_USERNAME }} --password-stdin <<< ${{ secrets.DOCKERBUILD_ROBOT_PASSWORD }} quay.io
+      run: docker login -u ${{ secrets.DOCKERBUILD_ROBOT_USERNAME }} -p <<< ${{ secrets.DOCKERBUILD_ROBOT_PASSWORD }} quay.io
 
     - name: Tag image
       run: docker tag ${IMAGE_NAME}:${IMAGE_TAG} quay.io/ecoflowucl/${IMAGE_NAME}:${IMAGE_TAG}
