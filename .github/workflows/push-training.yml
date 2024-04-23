@@ -6,7 +6,7 @@ on:
 #When updating images change image tag below to correspond to changes
 env:
   IMAGE_NAME: training
-  IMAGE_TAG: v3
+  IMAGE_TAG: v1
 
 jobs:
   build:
