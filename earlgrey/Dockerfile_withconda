@@ -1,0 +1,48 @@
+FROM ubuntu:22.04
+
+ARG datasets_version="v16.1.2"
+ARG datasets_architecture="linux-amd64"
+
+ARG earl_version="4.3.0"
+
+# Install dependencies and Miniconda
+RUN apt-get update \
+    && apt-get install -y wget procps unzip bzip2 \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Miniconda
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh \
+    && /bin/bash /tmp/miniconda.sh -b -p /opt/conda \
+    && rm /tmp/miniconda.sh \
+    && /opt/conda/bin/conda clean -tipsy
+
+# Update PATH
+ENV PATH="/opt/conda/bin:${PATH}"
+
+# Install Earlgrey using Conda
+RUN conda install -c bioconda earlgrey=${earl_version} \
+    && conda clean -a -y
+
+# Optionally, create and activate a Conda environment
+# RUN conda create -n myenv python=3.8 \
+#     && echo "source activate myenv" >> ~/.bashrc
+
+# If you need specific versions or packages
+# RUN conda install -n myenv package_name=version
+
+# Set up environment variables if necessary
+# ENV SOME_VAR=some_value
+
+# Add additional setup steps as needed
+
+# Set the working directory
+WORKDIR /workspace
+
+# Add any additional setup or installation steps here
+
+# Copy your application code to the container
+# COPY . /workspace
+
+# Run your application (replace this with your own command)
+# CMD ["python", "your_script.py"]
