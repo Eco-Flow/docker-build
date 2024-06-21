@@ -21,6 +21,8 @@ Copy an existing workflow yaml i.e. `cp push-jcvi.yml push-your_image_name.yml` 
 
 `docker build -t my-image .`
 
+use flag `-f` to specifically choose a Dockerfile, else it will assume `Dockerfile`
+
 2. Test the container 
 
 `docker run --rm -it my-image bash`
