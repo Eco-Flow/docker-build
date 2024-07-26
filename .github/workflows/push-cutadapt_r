@@ -41,3 +41,4 @@ jobs:
 
     - name: Clean workspace after finish
       run: rm -rf $GITHUB_WORKSPACE/*
+
