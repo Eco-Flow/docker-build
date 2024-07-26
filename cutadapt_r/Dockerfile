@@ -1,13 +1,17 @@
 FROM rocker/r-base:4.3.3
 
-# Install required packages
+# Install required system packages
 RUN apt-get update && \
-    apt-get install -y procps curl && \
+    apt-get install -y procps curl libxml2-dev libssl-dev libcurl4-openssl-dev && \
     apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
-# Install R packages
-RUN Rscript -e "install.packages(c('R.utils', 'dplyr', 'hash'))"
-RUN Rscript -e "install.packages(c('dada2', 'ShortRead', 'beepr', 'Biostrings'))"
+# Install R packages and BiocManager
+RUN Rscript -e "install.packages(c('R.utils', 'dplyr', 'hash', 'BiocManager', 'beepr'))"
+
+# Install dada2 using BiocManager
+RUN Rscript -e "BiocManager::install('dada2', update = TRUE, ask = FALSE)"
+RUN Rscript -e "BiocManager::install('ShortRead', update = TRUE, ask = FALSE)"
+RUN Rscript -e "BiocManager::install('Biostrings', update = TRUE, ask = FALSE)"
 
 # Install Mambaforge (a smaller and faster version of Miniconda)
 RUN mkdir -p /opt/software && \
@@ -32,3 +36,4 @@ RUN conda install -y cutadapt
 
 # Set up default command
 CMD ["R"]
+
