@@ -1,4 +1,4 @@
-name: Build cafe
+name: Build cafeplotter
 
 on:
   workflow_dispatch
