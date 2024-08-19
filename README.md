@@ -59,7 +59,13 @@ Go to settings on the Quay webpage for ecoflow
 
 <img width="814" alt="image" src="https://github.com/Eco-Flow/docker-build/assets/9978862/997f2e58-b601-4112-8405-1f512d1e890e">
 
-8. Go to Github and run the container build actions.
+8. Also you need to create a github action file for this repository. 
+
+In `.github/workflows`.
+
+Copy an example that exists for your container.
+
+9. Go to Github and run the container build actions.
 
 ### Listed below are containers cannot be built with actions
 pearrm - requires you buying software (free for academics) so uses local copy that can't be added to repo
