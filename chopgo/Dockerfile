@@ -4,7 +4,7 @@ RUN apt-get update && \
     apt-get install -y python3 wget procps libcurl4-openssl-dev libssl-dev perl && \
     apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
-RUN Rscript -e "install.packages(c('BiocManager', 'devtools', 'dplyr', 'readxl', 'writexls', 'plyr', 'gdata', 'pheatmap', 'ashr', 'ggplot2', 'ggstar'))"
+RUN Rscript -e "install.packages(c('BiocManager', 'devtools', 'dplyr', 'tidyr','readxl', 'writexls', 'plyr', 'gdata', 'pheatmap', 'ashr', 'ggplot2', 'ggstar'))"
 
 RUN Rscript -e "BiocManager::install('RCurl')"
 
