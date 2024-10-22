@@ -1,8 +1,8 @@
 FROM rocker/r-base:4.3.3
 
-# Install required system packages including Python
+# Install required system packages including Python and pandas
 RUN apt-get update && \
-    apt-get install -y procps curl libxml2-dev libssl-dev libcurl4-openssl-dev python3 python3-pip && \
+    apt-get install -y procps curl libxml2-dev libssl-dev libcurl4-openssl-dev python3 python3-pip python3-pandas && \
     apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # Create a directory for R libraries with proper permissions
