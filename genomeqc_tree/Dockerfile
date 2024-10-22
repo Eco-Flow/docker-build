@@ -11,5 +11,3 @@ RUN Rscript -e "install.packages(c('R.utils', 'BiocManager', 'dplyr', 'ggplot2',
 # Install ggtree using BiocManager
 RUN Rscript -e "BiocManager::install('ggtree', update = TRUE, ask = FALSE)"
 
-# Set up default command
-CMD ["R"]
