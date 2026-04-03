@@ -21,7 +21,8 @@ Copy an existing workflow yaml i.e. `cp push-jcvi.yml push-your_image_name.yml` 
 
 `docker build -t my-image .`
 
-use flag `-f` to specifically choose a Dockerfile, else it will assume `Dockerfile`
+- use flag `-f` to specifically choose a Dockerfile, else it will assume `Dockerfile`.
+- remember to add `RUN apt-get update && apt-get install -y procps` somewhere. Else nf will fail. 
 
 2. Test the container (use doecker to open the container and run the program/s of interest)
 
