@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     python3-dev \
     git \
+    procps \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=rust-builder /build/OrthoFinder /opt/orthofinder
