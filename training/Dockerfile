@@ -1,9 +1,8 @@
-FROM gitpod/workspace-base
+FROM mcr.microsoft.com/devcontainers/base:ubuntu
 
 USER root
 
 # Install util tools.
-# software-properties-common is needed to add ppa support for Apptainer installation
 RUN apt-get update --quiet && \
     apt-get install --yes \
         apt-transport-https \
@@ -17,28 +16,23 @@ RUN apt-get update --quiet && \
         python3 \
         r-base
 
-#Install java
+# Install java
 ENV JAVA_VERSION=17
-RUN apt-get update &&  apt-get install -y \
+RUN apt-get update && apt-get install -y \
     openjdk-${JAVA_VERSION}-jdk \
     && rm -rf /var/lib/apt/lists/*
 
-# User permissions
-RUN mkdir -p /workspace/data \
-    && chown -R gitpod:gitpod /workspace/data
+# Install nextflow
+RUN curl -s https://get.nextflow.io | bash && \
+    chmod +x nextflow && \
+    mv nextflow /usr/local/bin/nextflow
 
-# Change user to gitpod
-USER gitpod
+# Install nf-test
+RUN curl -fsSL https://code.askimed.com/install/nf-test | bash && \
+    mv nf-test /usr/local/bin/nf-test
 
-# Install nextflow 
-RUN curl -s https://get.nextflow.io | bash
-RUN chmod +x nextflow
-RUN sudo mv nextflow /usr/local/bin/nextflow
+RUN Rscript -e "install.packages(c('BiocManager'))"
 
-#Install nf-test
-RUN curl -fsSL https://code.askimed.com/install/nf-test | bash
-RUN sudo mv nf-test /usr/local/bin/nf-test
+RUN Rscript -e "BiocManager::install('DESeq2')"
 
-RUN sudo Rscript -e "install.packages(c('BiocManager'))"
-
-RUN sudo Rscript -e "BiocManager::install('DESeq2')"
+USER vscode
