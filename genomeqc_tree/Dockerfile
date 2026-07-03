@@ -22,10 +22,10 @@ ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
 RUN Rscript -e "install.packages(c('R.utils', 'httpuv', 'shiny', 'BiocManager', 'cowplot', 'dplyr', 'tidyr', 'ggplot2'))"
 
 # Install second batch of R packages
-RUN Rscript -e "install.packages(c('argparse', 'patchwork', 'scatterpie', 'scales','textshaping', 'svglite'))"
+RUN Rscript -e "install.packages(c('argparse', 'patchwork', 'scatterpie', 'scales','textshaping', 'svglite', 'ggnewscale'))"
 
 # Install ggtree
-RUN Rscript -e "BiocManager::install(c('ggtree'), update = FALSE, ask = FALSE)"
+RUN Rscript -e "BiocManager::install(c('ggtree', 'ggtreeExtra'), update = FALSE, ask = FALSE)"
 
 RUN mkdir /app
 
