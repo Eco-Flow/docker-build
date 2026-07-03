@@ -2,7 +2,7 @@ FROM rocker/r-base:4.3.3
 
 # Install system packages
 RUN apt-get update && \
-    apt-get install -y \
+    apt-get install -y -o Dpkg::Options::="--force-overwrite" \
       procps curl libxml2-dev libssl-dev libtiff-dev fontconfig fonts-liberation libcairo2-dev \
       libcurl4-openssl-dev python3 python3-pip python3-pandas libmagick++-dev libtool libharfbuzz-dev libfribidi-dev \
       r-cran-rcppeigen r-cran-lme4 r-cran-mgcv libfontconfig1-dev libfreetype6-dev bzip2 && \
